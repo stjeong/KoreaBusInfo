@@ -1,7 +1,8 @@
-﻿using KoreaBusInfo.Seoul;
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
+using KoreaBusInfo.Seoul;
 
 namespace ConsoleApp1
 {
@@ -30,7 +31,7 @@ namespace ConsoleApp1
             foreach (BusPosition position in positions)
             {
                 BusStation lastStation = stations.Find((elem) => elem.station == position.lastStnId);
-                Console.WriteLine($"\t'{lastStation.stationNm}'에서 출발, 현재 위치 ({position.posX}, {position.posY})");
+                Console.WriteLine($"\t'lastStation: {lastStation.stationNm}', 현재 위치 ({position.posX}, {position.posY})");
             }
         }
 

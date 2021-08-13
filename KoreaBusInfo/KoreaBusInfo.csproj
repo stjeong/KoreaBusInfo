@@ -1,7 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Version>1.0.1</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="nuget\**" />
+        <Compile Remove="nuget_output\**" />
+        <EmbeddedResource Remove="nuget\**" />
+        <EmbeddedResource Remove="nuget_output\**" />
+        <None Remove="nuget\**" />
+        <None Remove="nuget_output\**" />
+    </ItemGroup>
 
 </Project>
