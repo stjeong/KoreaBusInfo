@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using KoreaBusInfo.Seoul;
+using System.Linq;
 
 namespace ConsoleApp1
 {
@@ -27,11 +28,20 @@ namespace ConsoleApp1
             }
 
             List<BusPosition> positions = sbi.GetBusPositions(busRoute, stations);
-            Console.WriteLine($"운행 중인 버스(총: {positions.Count}개):");
-            foreach (BusPosition position in positions)
+            var runningBuses = positions.RunningBuses();
+
+            Console.WriteLine($"버스(총: {positions.Count}개):");
+
+            Console.WriteLine($"회차지  (총: {positions.StoppedBuses().Count()}개):");
+            Console.WriteLine($"운행 중 (총: {runningBuses.Count()}개):");
+
+            foreach (BusPosition position in runningBuses)
             {
-                BusStation lastStation = stations.Find((elem) => elem.station == position.lastStnId);
-                Console.WriteLine($"\t'lastStation: {lastStation.stationNm}', 현재 위치 ({position.posX}, {position.posY})");
+                // BusStation lastStation = stations.Find((elem) => elem.station == position.lastStnId);
+                BusStation lastStation = position.GetLastStation(stations);
+
+                // Console.WriteLine($"\t'lastStation: {lastStation.stationNm}', 현재 위치 ({position.posX}, {position.posY})");
+                Console.WriteLine($"\t'lastStation: {lastStation.stationNm}', 현재 위치 {position}");
             }
         }
 

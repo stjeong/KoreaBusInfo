@@ -66,4 +66,17 @@ namespace KoreaBusInfo.Seoul
             return xs.Deserialize(xr) as T;
         }
     }
+
+    public static class BusInfoLinqExtension
+    {
+        public static IEnumerable<BusPosition> StoppedBuses(this IEnumerable<BusPosition> buses)
+        {
+            return buses.Where(elem => elem.stopFlag == "1");
+        }
+
+        public static IEnumerable<BusPosition> RunningBuses(this IEnumerable<BusPosition> buses)
+        {
+            return buses.Where(elem => elem.stopFlag == "0");
+        }
+    }
 }

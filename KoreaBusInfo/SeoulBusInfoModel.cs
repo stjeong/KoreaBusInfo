@@ -1,4 +1,7 @@
-﻿using System.Xml.Serialization;
+﻿using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace KoreaBusInfo.Seoul
 {
@@ -102,8 +105,8 @@ namespace KoreaBusInfo.Seoul
 
     public class BusPosition
     {
-        public int busType;
-        public int congetion;
+        public int busType; /* (0:일반 버스, 1:저상) */
+        public int congetion; /* (0 : 없음, 3 : 여유, 4 : 보통, 5 : 혼잡, 6 : 매우 혼잡) */
         public string dataTm;
         public int isFullFlag;
         public string lastStnId;
@@ -114,9 +117,19 @@ namespace KoreaBusInfo.Seoul
         public string sectDist;
         public int sectOrd;
         public string sectionId;
-        public string stopFlag;
+        public string stopFlag; /* (1:도착, 0:운행 중) */
         public float tmX;
         public float tmY;
         public string vehId;
+
+        public BusStation GetLastStation(IEnumerable<BusStation> stations)
+        {
+            return stations.FirstOrDefault((elem) => elem.station == this.lastStnId);
+        }
+
+        public override string ToString()
+        {
+            return $"({posX}, {posY})";
+        }
     }
 }
